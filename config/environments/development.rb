@@ -1,6 +1,9 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  # ws://localhost:3000/cable
+  # is the default URI for action cable
+  # however, specifying here so that we can customize later
   config.action_cable.url = "ws://localhost:3000/cable"
 
   # In the development environment your application's code is reloaded on
