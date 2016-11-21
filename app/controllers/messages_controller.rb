@@ -4,7 +4,15 @@ class MessagesController < ApplicationController
     message.user = current_user
 
     if message.save
-      # do stuff
+      # keys:
+      # => there is nothing special about the :message or :user keys
+      # => we can specify any keys we want and send over the channel
+      # => just need to tell our subscriber to expect those keys
+      ActionCable.server.broadcast
+        'messages', # name of the channel to which we are broadcasting
+        message: message.content,
+        user: message.user.username
+      head :ok
     else
       redirect_to chatrooms_path
     end
