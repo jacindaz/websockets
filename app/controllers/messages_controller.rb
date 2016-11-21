@@ -8,6 +8,11 @@ class MessagesController < ApplicationController
       # => there is nothing special about the :message or :user keys
       # => we can specify any keys we want and send over the channel
       # => just need to tell our subscriber to expect those keys
+      #
+      # broadcasting:
+      # => we are really sending this message to be saved into Redis
+      # => aka "send new messages to the messages channel, which is
+      #    is maintained by Redis"
       ActionCable.server.broadcast
         'messages', # name of the channel to which we are broadcasting
         message: message.content,
